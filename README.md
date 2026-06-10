@@ -2,7 +2,9 @@
 
 `Packages/User` for Sublime Text 4 — set up to work as close to my
 [Emacs config](https://github.com/christerso/emacs-config) as Sublime allows. Languages: Go, C, C++,
-x86-64 assembly (NASM + GAS), Zig.
+x86-64 assembly (NASM + GAS), Zig, Odin (ols), plus syntax highlighting for
+Protocol Buffers, Cap'n Proto and CMake (Rust/Go/TOML/YAML ship built-in
+with ST4).
 
 ## Restore on a new machine
 

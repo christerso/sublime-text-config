@@ -24,6 +24,23 @@
             "selector": "source.assembly | source.asm | source.nasm",
             "schemes": ["file"]
         },
+        "ols": {
+            "enabled": true,
+            "command": ["ols"],
+            "selector": "source.odin",
+            "schemes": ["file"],
+            // Same initializationOptions as the Neovim setup (ols reads
+            // project-local ols.json too, which overrides these).
+            "initializationOptions": {
+                "enable_semantic_tokens": true,
+                "enable_document_symbols": true,
+                "enable_hover": true,
+                "enable_snippets": true,
+                "enable_format": true,
+                "enable_references": true,
+                "enable_rename": true
+            }
+        },
         "zls": {
             "enabled": true,
             "command": ["/home/christer/.local/bin/zls"],
