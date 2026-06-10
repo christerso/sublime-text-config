@@ -1,0 +1,18 @@
+// clangd settings — use the system clangd (Arch `clang` package), same flags
+// as the Emacs eglot entry. Project behavior (background indexing, all-scopes
+// completion, stdlib symbols) comes from the GLOBAL clangd config at
+// ~/.config/clangd/config.yaml, which all editors share.
+//
+// compile_commands.json: clangd finds it in the project root or build/.
+// For a CMake project without one, run the "Generate compile_commands
+// (cmake)" build variant (Ctrl+C C) once — same effect as the automatic
+// hook in Emacs/Neovim.
+{
+    "binary": "system",
+    "initializationOptions": {
+        "clangd.background-index": true,
+        "clangd.clang-tidy": true,
+        "clangd.completion-style": "detailed",
+        "clangd.header-insertion": "iwyu"
+    }
+}

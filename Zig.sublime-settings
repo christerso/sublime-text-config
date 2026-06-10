@@ -1,0 +1,11 @@
+// Per-syntax overrides for Zig buffers.
+{
+    "tab_size": 4,
+    "translate_tabs_to_spaces": true,
+    "trim_trailing_white_space_on_save": "all",
+    "ensure_newline_at_eof_on_save": true,
+    "rulers": [100],
+
+    // LSP format-on-save via zls (textDocument/formatting → zig fmt).
+    "lsp_format_on_save": true
+}

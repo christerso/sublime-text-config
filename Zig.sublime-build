@@ -1,0 +1,51 @@
+// Zig build system. Tools menu → Build System → Zig, then Ctrl-B builds,
+// Ctrl-Shift-B opens the variant picker (run / test / fmt / release).
+{
+    "shell_cmd": "zig build",
+    "file_regex": "^(.+?):(\\d+):(\\d+): (?:error|warning): (.+)$",
+    "working_dir": "${project_path:${folder:${file_path}}}",
+    "selector": "source.zig",
+
+    "variants":
+    [
+        {
+            "name": "Run (zig build run)",
+            "shell_cmd": "zig build run"
+        },
+        {
+            "name": "Test (zig build test)",
+            "shell_cmd": "zig build test --summary all"
+        },
+        {
+            "name": "Test current file (zig test)",
+            "shell_cmd": "zig test \"$file\"",
+            "working_dir": "$file_path"
+        },
+        {
+            "name": "Format current file (zig fmt)",
+            "shell_cmd": "zig fmt \"$file\"",
+            "working_dir": "$file_path"
+        },
+        {
+            "name": "Release Safe",
+            "shell_cmd": "zig build -Doptimize=ReleaseSafe"
+        },
+        {
+            "name": "Release Fast",
+            "shell_cmd": "zig build -Doptimize=ReleaseFast"
+        },
+        {
+            "name": "Release Small",
+            "shell_cmd": "zig build -Doptimize=ReleaseSmall"
+        },
+        {
+            "name": "Check (zig build check)",
+            "shell_cmd": "zig build check"
+        },
+        {
+            "name": "zig version",
+            "shell_cmd": "zig version",
+            "working_dir": "$file_path"
+        }
+    ]
+}

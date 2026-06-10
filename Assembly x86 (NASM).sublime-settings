@@ -1,0 +1,7 @@
+// x86-64 assembly (NASM syntax from the "NASM x86 Assembly" package):
+// classic 8-column tabs for aligned mnemonic/operand columns — same as
+// the Emacs nasm-mode setup.
+{
+    "tab_size": 8,
+    "translate_tabs_to_spaces": false
+}

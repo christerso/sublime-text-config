@@ -1,0 +1,27 @@
+{
+	"ignored_packages":
+	[
+		"Vintage",
+	],
+	// Voidlight = the same palette as the Emacs/Neovim themes (near-black bg,
+	// pearl fg). Calm dark alternatives installed alongside: Catppuccin
+	// (Mocha/Macchiato), Nord, ayu (Mirage/Dark), Gruvbox Material — switch
+	// with  Ctrl+Shift+P → "UI: Select Color Scheme".
+	"color_scheme": "Voidlight.sublime-color-scheme",
+	"theme": "Adaptive.sublime-theme",
+	"index_files": true,
+
+	// Same face as Emacs/terminal (ttf-jetbrains-mono-nerd).
+	"font_face": "JetBrainsMonoNL NFM",
+	"font_size": 12,
+
+	"highlight_line": true,
+	"caret_style": "solid",
+	"scroll_past_end": true,
+	"find_selected_text": true,
+	"show_definitions": false,        // LSP popups instead of the built-in ones
+	"mini_diff": true,                // gutter VCS marks (diff-hl equivalent)
+	"ensure_newline_at_eof_on_save": true,
+	"translate_tabs_to_spaces": true, // default; Go/asm override per syntax
+	"tab_size": 4,
+}

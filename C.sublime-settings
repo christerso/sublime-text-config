@@ -1,0 +1,8 @@
+// C: 4-space indent (matches .clang-format UseTab: Never in projects).
+// No format-on-save — Emacs only formats when the project has a
+// .clang-format, and Sublime can't express that condition; format on
+// demand with Ctrl+Alt+L instead.
+{
+    "tab_size": 4,
+    "translate_tabs_to_spaces": true
+}

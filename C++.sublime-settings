@@ -1,0 +1,6 @@
+// C++: 4-space indent. See C.sublime-settings for the no-format-on-save
+// rationale (format on demand: Ctrl+Alt+L).
+{
+    "tab_size": 4,
+    "translate_tabs_to_spaces": true
+}

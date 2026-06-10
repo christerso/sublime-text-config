@@ -1,0 +1,48 @@
+// Global LSP settings — zls and asm-lsp are registered here directly because
+// there are no stable helper packages for them on Package Control.
+// zls: hand-installed 0.16.0 at ~/.local/bin/zls, version-matched to zig.
+// asm-lsp: /usr/bin/asm-lsp (AUR), global dialect config (NASM, x86-64) in
+//          ~/.config/asm-lsp/.asm-lsp.toml — same server Emacs/Neovim use;
+//          hover documents every instruction and register.
+// gopls and clangd come from the LSP-gopls / LSP-clangd helper packages.
+{
+    "show_diagnostics_panel_on_save": 0,
+    "diagnostics_highlight_style": "box",
+    "show_inlay_hints": false,
+
+    // Mirror the Emacs save behavior: gopls organizes imports on save.
+    // Only servers that advertise the action react, so this is a no-op
+    // for clangd/zls/asm-lsp.
+    "lsp_code_actions_on_save": {
+        "source.organizeImports": true
+    },
+
+    "clients": {
+        "asm-lsp": {
+            "enabled": true,
+            "command": ["asm-lsp"],
+            "selector": "source.assembly | source.asm | source.nasm",
+            "schemes": ["file"]
+        },
+        "zls": {
+            "enabled": true,
+            "command": ["/home/christer/.local/bin/zls"],
+            "selector": "source.zig",
+            "schemes": ["file"],
+            "initializationOptions": {
+                "enable_build_on_save": true,
+                "build_on_save_step": "check",
+                "enable_snippets": true,
+                "enable_argument_placeholders": true,
+                "warn_style": true,
+                "highlight_global_var_declarations": true,
+                "inlay_hints_show_variable_type_hints": true,
+                "inlay_hints_show_parameter_name": true,
+                "inlay_hints_show_builtin": true,
+                "inlay_hints_exclude_single_argument": true,
+                "inlay_hints_hide_redundant_param_names": true,
+                "inlay_hints_hide_redundant_param_names_last_token": true
+            }
+        }
+    }
+}

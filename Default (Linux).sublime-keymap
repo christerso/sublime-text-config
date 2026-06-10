@@ -1,0 +1,139 @@
+// Sublime Text shortcuts — mirrors the Emacs setup (~/.emacs.d/CHEATSHEET.org)
+// as closely as Sublime allows. Ctrl+C is the Emacs prefix key (chords below),
+// so plain Ctrl+C no longer copies: use Ctrl+Shift+C or Ctrl+Insert.
+// Zig keybindings (from the earlier Zed/LazyVim flow) are kept unchanged.
+//
+//   Ctrl+C F F   fuzzy find file              (Emacs C-c f f)
+//   Ctrl+C F G   grep across the project      (C-c f g)
+//   Ctrl+C F S   fuzzy LSP symbol, project    (C-c f s)
+//   Ctrl+C F J   fuzzy symbol in file         (C-c f j)
+//   Ctrl+C F L   fuzzy line text in file      (C-c f l)
+//   Ctrl+C C     build, pick variant          (C-c c)
+//   Ctrl+C Ctrl+C  re-run last build          (C-c C-c)
+//   Ctrl+C R     build variant "Run"          (C-c r)
+//   Ctrl+C T T/P go test package / project    (C-c t t / t p)
+//   Ctrl+C O     switch source/header (C/C++) (C-c o)
+//   Ctrl+C A     LSP code actions
+//   Ctrl+C G N/P next / prev git hunk         (C-c g n / g p)
+//   Ctrl+.       goto definition              (C-.)
+//   Ctrl+,       find references              (C-,)
+//   Alt+,        jump back                    (M-,)
+[
+    // ─── Emacs muscle memory: navigation ────────────────────────────────
+    {
+        "keys": ["ctrl+."],
+        "command": "lsp_symbol_definition",
+        "context": [{"key": "lsp.session_with_capability", "operand": "definitionProvider"}]
+    },
+    {
+        "keys": ["ctrl+,"],
+        "command": "lsp_symbol_references",
+        "context": [{"key": "lsp.session_with_capability", "operand": "referencesProvider"}]
+    },
+    { "keys": ["alt+,"], "command": "jump_back" },
+
+    // ─── Emacs muscle memory: the C-c prefix ────────────────────────────
+    { "keys": ["ctrl+shift+c"], "command": "copy" },   // plain Ctrl+C is the prefix now
+
+    { "keys": ["ctrl+c", "f", "f"], "command": "show_overlay",
+      "args": {"overlay": "goto", "show_files": true} },
+    { "keys": ["ctrl+c", "f", "g"], "command": "show_panel",
+      "args": {"panel": "find_in_files"} },
+    {
+        "keys": ["ctrl+c", "f", "s"],
+        "command": "lsp_workspace_symbols",
+        "context": [{"key": "lsp.session_with_capability", "operand": "workspaceSymbolProvider"}]
+    },
+    { "keys": ["ctrl+c", "f", "j"], "command": "show_overlay",
+      "args": {"overlay": "goto", "text": "@"} },
+    { "keys": ["ctrl+c", "f", "l"], "command": "show_overlay",
+      "args": {"overlay": "goto", "text": "#"} },
+
+    { "keys": ["ctrl+c", "c"],      "command": "build", "args": {"select": true} },
+    { "keys": ["ctrl+c", "ctrl+c"], "command": "build" },
+    { "keys": ["ctrl+c", "r"],      "command": "build", "args": {"variant": "Run"} },
+    {
+        "keys": ["ctrl+c", "t", "t"],
+        "command": "build", "args": {"variant": "Test package"},
+        "context": [{"key": "selector", "operator": "equal", "operand": "source.go"}]
+    },
+    {
+        "keys": ["ctrl+c", "t", "p"],
+        "command": "build", "args": {"variant": "Test project"},
+        "context": [{"key": "selector", "operator": "equal", "operand": "source.go"}]
+    },
+    {
+        "keys": ["ctrl+c", "o"],
+        "command": "lsp_clangd_switch_source_header",
+        "context": [{"key": "selector", "operator": "equal", "operand": "source.c | source.c++"}]
+    },
+    {
+        "keys": ["ctrl+c", "a"],
+        "command": "lsp_code_actions",
+        "context": [{"key": "lsp.session_with_capability", "operand": "codeActionProvider"}]
+    },
+    { "keys": ["ctrl+c", "g", "n"], "command": "git_gutter_next_change" },
+    { "keys": ["ctrl+c", "g", "p"], "command": "git_gutter_prev_change" },
+
+    // ─── LSP: format on demand, everywhere ──────────────────────────────
+    {
+        "keys": ["ctrl+alt+l"],
+        "command": "lsp_format_document",
+        "context": [{"key": "lsp.session_with_capability", "operand": "documentFormattingProvider"}]
+    },
+
+    // ─── Zig (kept from the earlier setup) ──────────────────────────────
+    {
+        "keys": ["ctrl+shift+b"],
+        "command": "build",
+        "args": {"variant": ""},
+        "context": [{"key": "selector", "operator": "equal", "operand": "source.zig"}]
+    },
+    {
+        "keys": ["ctrl+shift+r"],
+        "command": "build",
+        "args": {"variant": "Run (zig build run)"},
+        "context": [{"key": "selector", "operator": "equal", "operand": "source.zig"}]
+    },
+    {
+        "keys": ["ctrl+shift+t"],
+        "command": "build",
+        "args": {"variant": "Test (zig build test)"},
+        "context": [{"key": "selector", "operator": "equal", "operand": "source.zig"}]
+    },
+    {
+        "keys": ["ctrl+alt+t"],
+        "command": "build",
+        "args": {"variant": "Test current file (zig test)"},
+        "context": [{"key": "selector", "operator": "equal", "operand": "source.zig"}]
+    },
+    {
+        "keys": ["ctrl+alt+b"],
+        "command": "build",
+        "args": {"variant": "Release Safe"},
+        "context": [{"key": "selector", "operator": "equal", "operand": "source.zig"}]
+    },
+
+    // ─── LSP navigation (function keys, kept) ───────────────────────────
+    {
+        "keys": ["f12"],
+        "command": "lsp_symbol_definition",
+        "context": [{"key": "lsp.session_with_capability", "operand": "definitionProvider"}]
+    },
+    {
+        "keys": ["shift+f12"],
+        "command": "lsp_symbol_references",
+        "context": [{"key": "lsp.session_with_capability", "operand": "referencesProvider"}]
+    },
+    {
+        "keys": ["f2"],
+        "command": "lsp_symbol_rename",
+        "context": [{"key": "lsp.session_with_capability", "operand": "renameProvider"}]
+    },
+    {
+        "keys": ["ctrl+k", "ctrl+i"],
+        "command": "lsp_hover",
+        "context": [{"key": "lsp.session_with_capability", "operand": "hoverProvider"}]
+    },
+    { "keys": ["ctrl+shift+i"], "command": "lsp_toggle_inlay_hints" }
+]

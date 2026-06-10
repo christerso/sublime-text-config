@@ -1,0 +1,134 @@
+{
+    "name": "Voidlight",
+    "author": "Christer Söderlund",
+    // Port of the voidlight palette shared by Emacs (~/.emacs.d/themes/
+    // voidlight-theme.el) and Neovim — near-black background, pearl (never
+    // white) foreground, calm subdued accents. CivNode style.
+    "variables": {
+        "background":    "#010101",
+        "current_line":  "#1a1a1a",
+        "block_bg":      "#222222",
+        "selection":     "#2b3a4c",
+        "foreground":    "#c5c8ce",
+        "comment":       "#5e6a82",
+        "green_gray":    "#6b8b74",
+        "red":           "#b5645d",
+        "orange":        "#d98e1d",
+        "blue":          "#5d89c7",
+        "function_blue": "#6b99d2",
+        "warm_amber":    "#d7975a",
+        "magenta":       "#b48ead",
+        "string_gray":   "#70757a",
+        "gray":          "#9ca0a4",
+        "pearl":         "#bfbfbf"
+    },
+    "globals": {
+        "background":                  "var(background)",
+        "foreground":                  "var(foreground)",
+        "caret":                       "var(orange)",
+        "block_caret":                 "var(orange)",
+        "line_highlight":              "var(current_line)",
+        "selection":                   "var(selection)",
+        "selection_border":            "var(selection)",
+        "inactive_selection":          "#222a33",
+        "misspelling":                 "var(red)",
+        "highlight":                   "var(orange)",
+        "find_highlight":              "var(orange)",
+        "find_highlight_foreground":   "var(background)",
+        "guide":                       "var(block_bg)",
+        "active_guide":                "var(comment)",
+        "stack_guide":                 "var(block_bg)",
+        "brackets_options":            "underline",
+        "brackets_foreground":         "var(orange)",
+        "bracket_contents_options":    "underline",
+        "bracket_contents_foreground": "var(orange)",
+        "tags_options":                "underline",
+        "gutter":                      "var(background)",
+        "gutter_foreground":           "#4a4f56",
+        "line_diff_added":             "var(green_gray)",
+        "line_diff_modified":          "var(blue)",
+        "line_diff_deleted":           "var(red)"
+    },
+    "rules": [
+        { "name": "Comment",
+          "scope": "comment, punctuation.definition.comment",
+          "foreground": "var(comment)" },
+
+        { "name": "String",
+          "scope": "string",
+          "foreground": "var(string_gray)" },
+
+        { "name": "Number / constant",
+          "scope": "constant.numeric, constant.language, constant.character, constant.other",
+          "foreground": "var(blue)" },
+
+        { "name": "Keyword / control / operator word",
+          "scope": "keyword, keyword.control, keyword.operator.word, storage, storage.type, storage.modifier",
+          "foreground": "var(orange)" },
+
+        { "name": "Operators / punctuation stay quiet",
+          "scope": "keyword.operator, punctuation",
+          "foreground": "var(gray)" },
+
+        { "name": "Function names (definition and call)",
+          "scope": "entity.name.function, support.function, variable.function, meta.function-call.generic",
+          "foreground": "var(function_blue)" },
+
+        { "name": "Types / classes / structs",
+          "scope": "entity.name.type, entity.name.class, entity.name.struct, entity.name.enum, support.type, support.class, entity.other.inherited-class",
+          "foreground": "var(green_gray)" },
+
+        { "name": "Variables / parameters",
+          "scope": "variable.parameter, variable.other.member, meta.mapping.key string",
+          "foreground": "var(warm_amber)" },
+
+        { "name": "Plain variables stay foreground",
+          "scope": "variable.other",
+          "foreground": "var(foreground)" },
+
+        { "name": "Labels / sections (assembly), tags",
+          "scope": "entity.name.label, entity.name.tag, entity.name.section",
+          "foreground": "var(warm_amber)" },
+
+        { "name": "Registers (assembly) / builtins",
+          "scope": "constant.language.register, variable.language, support.constant",
+          "foreground": "var(blue)" },
+
+        { "name": "Decorators / annotations / preprocessor",
+          "scope": "entity.name.function.decorator, meta.annotation, meta.preprocessor, keyword.control.import, keyword.other.directive",
+          "foreground": "var(magenta)" },
+
+        { "name": "Invalid / error",
+          "scope": "invalid, invalid.illegal",
+          "foreground": "var(red)" },
+
+        { "name": "Diff added",
+          "scope": "markup.inserted, diff.inserted",
+          "foreground": "var(green_gray)" },
+        { "name": "Diff removed",
+          "scope": "markup.deleted, diff.deleted",
+          "foreground": "var(red)" },
+        { "name": "Diff changed",
+          "scope": "markup.changed, diff.changed",
+          "foreground": "var(blue)" },
+
+        { "name": "Markup heading",
+          "scope": "markup.heading, entity.name.section.markdown",
+          "foreground": "var(green_gray)",
+          "font_style": "bold" },
+        { "name": "Markup link",
+          "scope": "markup.underline.link",
+          "foreground": "var(pearl)" },
+        { "name": "Markup bold",
+          "scope": "markup.bold",
+          "foreground": "var(warm_amber)",
+          "font_style": "bold" },
+        { "name": "Markup italic",
+          "scope": "markup.italic",
+          "font_style": "italic" },
+        { "name": "Markup inline code",
+          "scope": "markup.raw.inline, markup.raw.block",
+          "foreground": "var(gray)",
+          "background": "var(block_bg)" }
+    ]
+}
