@@ -15,6 +15,7 @@
 //   Ctrl+]           next error/diagnostic     (overrides indent; use Tab)
 //   Ctrl+[           prev error/diagnostic     (overrides unindent; use Shift+Tab)
 //   Alt+.            jump forward
+//   Ctrl+Alt+Left/Right  jump back / forward (JetBrains-style)
 //   Alt+H / Alt+L    previous / next tab
 //   Ctrl+K           close buffer              (overrides delete-chord prefix)
 //   Ctrl+`           toggle terminal panel     (Terminus; ST console -> View menu)
@@ -47,6 +48,9 @@
     },
     { "keys": ["ctrl+,"], "command": "jump_back" },
     { "keys": ["alt+."],  "command": "jump_forward" },
+    // JetBrains-style navigate back/forward.
+    { "keys": ["ctrl+alt+left"],  "command": "jump_back" },
+    { "keys": ["ctrl+alt+right"], "command": "jump_forward" },
     {
         "keys": ["ctrl+r"],
         "command": "lsp_symbol_references",
