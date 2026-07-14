@@ -135,6 +135,45 @@
 			"layer0.tint": "#9ca0a4",
 		},
 
+		// Tabs: with every surface pinned to the same near-black, Adaptive's
+		// default active-tab treatment is invisible. The active tab is filled
+		// solid orange (the Voidlight accent, same as the sidebar selection)
+		// with near-black text on it; inactive labels are dimmed.
+		{
+			"class": "tab_label",
+			"fg": "#7a7f87",
+		},
+		{
+			"class": "tab_label",
+			"parents": [{"class": "window", "attributes": ["file_light"]}],
+			"fg": "#7a7f87",
+		},
+		{
+			"class": "tab_label",
+			"parents": [{"class": "tab_control", "attributes": ["selected"]}],
+			"fg": "#0d0d0d",
+		},
+		{
+			"class": "tab_label",
+			"parents": [
+				{"class": "window", "attributes": ["file_light"]},
+				{"class": "tab_control", "attributes": ["selected"]}
+			],
+			"fg": "#0d0d0d",
+		},
+		{
+			"class": "tab_control",
+			"attributes": ["selected"],
+			"layer0.tint": "#d98e1d",
+			"layer0.opacity": 1.0,
+		},
+		// Keep the close/dirty button visible against the orange fill.
+		{
+			"class": "tab_close_button",
+			"parents": [{"class": "tab_control", "attributes": ["selected"]}],
+			"layer0.tint": "#0d0d0d",
+		},
+
 		// Title bar (Windows), same treatment as the sidebar.
 		{
 			"class": "title_bar",
