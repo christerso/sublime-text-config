@@ -1,0 +1,21 @@
+// Mouse bindings (Windows).
+//   Ctrl+Click   goto definition via LSP (replaces default add-caret;
+//                the press still places the caret first, so on non-LSP
+//                buffers it just behaves like a normal click)
+//   Alt+Click    add caret (relocated multi-cursor)
+[
+    {
+        "button": "button1",
+        "count": 1,
+        "modifiers": ["ctrl"],
+        "press_command": "drag_select",
+        "command": "lsp_symbol_definition"
+    },
+    {
+        "button": "button1",
+        "count": 1,
+        "modifiers": ["alt"],
+        "press_command": "drag_select",
+        "press_args": {"additive": true}
+    }
+]
