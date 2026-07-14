@@ -161,11 +161,16 @@
 			],
 			"fg": "#0d0d0d",
 		},
+		// The rounded-tab body is layer1, colored via tint_index from the
+		// tabset background blended with tint_modifier (layer0 is the
+		// surround and is forced to opacity 0 on selected tabs, so tinting
+		// it does nothing). An opaque orange modifier fills the whole tab.
 		{
 			"class": "tab_control",
 			"attributes": ["selected"],
-			"layer0.tint": "#d98e1d",
-			"layer0.opacity": 1.0,
+			"tint_modifier": "#d98e1d",
+			"layer1.tint": "#d98e1d",
+			"layer1.opacity": 1.0,
 		},
 		// Keep the close/dirty button visible against the orange fill.
 		{
