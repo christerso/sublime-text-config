@@ -1,0 +1,14 @@
+{
+    // Git Bash as the default terminal (matches the usual console setup).
+    "shell_configs": [
+        {
+            "name": "Git Bash",
+            "cmd": ["C:\\Program Files\\Git\\bin\\bash.exe", "-i", "-l"],
+            "enable": true,
+            "platforms": ["windows"]
+        }
+    ],
+    "default_config": {
+        "windows": "Git Bash"
+    }
+}

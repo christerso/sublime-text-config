@@ -24,6 +24,9 @@
 		"Package Control",
 		"Pretty JSON",
 		"Protocol Buffer Syntax",
+		"Shader Syntax (GLSL HLSL Cg)",
+		"Terminality",
+		"Terminus",
 		"Zig Language",
 	],
 }

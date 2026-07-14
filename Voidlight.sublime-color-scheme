@@ -20,7 +20,11 @@
         "magenta":       "#b48ead",
         "string_gray":   "#70757a",
         "gray":          "#9ca0a4",
-        "pearl":         "#bfbfbf"
+        "pearl":         "#bfbfbf",
+        // Search / occurrence highlights — bright so they're easy to spot
+        // against the near-black background.
+        "search_border": "#ffc66d",                          // vivid border for other matches
+        "search_fill":   "color(var(orange) alpha(0.5))"     // translucent orange wash, active match
     },
     "globals": {
         "background":                  "var(background)",
@@ -32,9 +36,9 @@
         "selection_border":            "var(selection)",
         "inactive_selection":          "#222a33",
         "misspelling":                 "var(red)",
-        "highlight":                   "var(orange)",
-        "find_highlight":              "var(orange)",
-        "find_highlight_foreground":   "var(background)",
+        "highlight":                   "var(search_border)",
+        "find_highlight":              "var(search_fill)",
+        "find_highlight_foreground":   "var(foreground)",
         "guide":                       "var(block_bg)",
         "active_guide":                "var(comment)",
         "stack_guide":                 "var(block_bg)",

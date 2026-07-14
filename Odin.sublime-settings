@@ -1,0 +1,6 @@
+// Odin: tabs displayed 4 wide; ols/odinfmt handle formatting via LSP.
+{
+    "tab_size": 4,
+    "translate_tabs_to_spaces": false,
+    "lsp_format_on_save": true
+}

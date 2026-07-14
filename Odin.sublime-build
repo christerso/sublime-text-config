@@ -1,0 +1,32 @@
+{
+    "selector": "source.odin",
+
+    // Default (Ctrl+B): type-check the package in the current file's dir.
+    // Works for BOTH libraries and executables — no `main` required — so it
+    // never trips the "Undefined entry point procedure 'main'" error. Fast,
+    // and errors are F4-navigable via file_regex below.
+    "shell_cmd": "odin check .",
+    "working_dir": "${file_path}",
+    // odin errors:  path(line:col) message
+    "file_regex": "^(.+\\.odin)\\(([0-9]+):([0-9]+)\\) (.*)$",
+
+    "variants": [
+        // ── run the PROJECT ROOT executable ───────────────────────────
+        // ${folder} = the top folder open in the side bar (the repo root /
+        // the main package), regardless of which file is focused.
+        { "name": "Run",            "working_dir": "${folder}", "shell_cmd": "odin run ." },
+        { "name": "Build",          "working_dir": "${folder}", "shell_cmd": "odin build . -out:.\\out.exe" },
+        { "name": "Build (debug)",  "working_dir": "${folder}", "shell_cmd": "odin build . -debug -out:.\\out.exe" },
+
+        // ── run scoped to the current file / package ──────────────────
+        { "name": "Run this package", "shell_cmd": "odin run ." },
+        { "name": "Run this file",    "shell_cmd": "odin run \"$file_name\" -file" },
+
+        // ── libraries / packages without a main ───────────────────────
+        { "name": "Check",          "shell_cmd": "odin check ." },
+        { "name": "Build object",   "shell_cmd": "odin build . -build-mode:obj" },
+
+        // ── tests ─────────────────────────────────────────────────────
+        { "name": "Test package",   "shell_cmd": "odin test ." }
+    ]
+}
