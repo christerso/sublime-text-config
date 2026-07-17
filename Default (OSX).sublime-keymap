@@ -1,0 +1,135 @@
+// Sublime Text keybindings (macOS) — IDENTICAL to the Windows map: the same
+// literal Ctrl keys and Ctrl+Space leader, so muscle memory carries over
+// unchanged. Cmd (super) keeps the native mac Cmd+C/X/V/Q/W/S; the editor
+// actions below stay on Ctrl exactly as on Windows.
+//
+// Two macOS-only prerequisites (the keys need freeing from the OS):
+//   • Ctrl+Space — macOS binds it to "Select the previous input source".
+//     Turn it off: System Settings › Keyboard › Keyboard Shortcuts… ›
+//     Input Sources — uncheck it, or it will swallow the leader.
+//   • Goto-definition on click is Cmd+Click here (see the .sublime-mousemap),
+//     because Ctrl+Click is the macOS secondary (right) click.
+//
+//   Ctrl+F           find file (fuzzy)         (overrides in-file find)
+//   Ctrl+Shift+F     find in current file      (relocated in-file find)
+//   Ctrl+G           grep across the project   (overrides goto-line; ':' in
+//                                                the finder still jumps lines)
+//   Ctrl+B           build project (Go/Odin, auto by syntax)
+//   Ctrl+Shift+B     run (go run . / odin run .)
+//
+//   Ctrl+.           goto definition
+//   Ctrl+,           jump back
+//   Ctrl+R           list references           (overrides symbol-in-file)
+//   Ctrl+]           next error/diagnostic     (overrides indent; use Tab)
+//   Ctrl+[           prev error/diagnostic     (overrides unindent; use Shift+Tab)
+//   Alt+.            jump forward
+//   Ctrl+Alt+Left/Right  jump back / forward (JetBrains-style)
+//   Alt+H / Alt+L    previous / next tab
+//   Ctrl+K           close buffer              (overrides delete-chord prefix)
+//   Ctrl+`           toggle terminal panel     (Terminus; ST console -> View menu)
+//   F12 def · Shift+F12 refs · F2 rename · Ctrl+Alt+L format
+//   Ctrl+Shift+R     symbol in project         (Sublime native)
+//
+//   Leader (Ctrl+Space) — secondary actions:
+//   Ctrl+Space T T / T P   test package / project
+//   Ctrl+Space A           LSP code actions
+//   Ctrl+Space I           LSP hover (info)
+//   Ctrl+Space G N / G P   next / prev git hunk
+//   Ctrl+Space B           switch open buffer / file
+//   (manual autocomplete -> Ctrl+Shift+Space)
+[
+    // ─── find / search / build (single Ctrl keys) ───────────────────────
+    { "keys": ["ctrl+f"], "command": "show_overlay",
+      "args": {"overlay": "goto", "show_files": true} },
+    { "keys": ["ctrl+shift+f"], "command": "show_panel",
+      "args": {"panel": "find", "reverse": false} },
+    { "keys": ["ctrl+g"], "command": "show_panel",
+      "args": {"panel": "find_in_files"} },
+    { "keys": ["ctrl+b"], "command": "build" },
+    { "keys": ["ctrl+shift+b"], "command": "build", "args": {"variant": "Run"} },
+
+    // ─── LSP navigation ─────────────────────────────────────────────────
+    {
+        "keys": ["ctrl+."],
+        "command": "lsp_symbol_definition",
+        "context": [{"key": "lsp.session_with_capability", "operand": "definitionProvider"}]
+    },
+    { "keys": ["ctrl+,"], "command": "jump_back" },
+    { "keys": ["alt+."],  "command": "jump_forward" },
+    // JetBrains-style navigate back/forward.
+    { "keys": ["ctrl+alt+left"],  "command": "jump_back" },
+    { "keys": ["ctrl+alt+right"], "command": "jump_forward" },
+    {
+        "keys": ["ctrl+r"],
+        "command": "lsp_symbol_references",
+        "context": [{"key": "lsp.session_with_capability", "operand": "referencesProvider"}]
+    },
+
+    // ─── jump between errors / diagnostics ──────────────────────────────
+    // (gated on lsp_active so Ctrl+[ / Ctrl+] still indent/unindent in
+    //  non-code buffers)
+    { "keys": ["ctrl+]"], "command": "lsp_next_diagnostic",
+      "context": [{"key": "setting.lsp_active"}] },
+    { "keys": ["ctrl+["], "command": "lsp_prev_diagnostic",
+      "context": [{"key": "setting.lsp_active"}] },
+
+    // ─── tabs / buffers ─────────────────────────────────────────────────
+    { "keys": ["alt+l"], "command": "next_view" },
+    { "keys": ["alt+h"], "command": "prev_view" },
+    { "keys": ["ctrl+k"], "command": "close" },   // close buffer, not delete chord
+
+    // ─── terminal (Terminus panel at the bottom) ────────────────────────
+    { "keys": ["ctrl+`"], "command": "toggle_terminus_panel",
+      "args": {"cwd": "${file_path:${folder}}"} },
+
+    // ─── LSP: rename / format / function-key nav ────────────────────────
+    {
+        "keys": ["f12"],
+        "command": "lsp_symbol_definition",
+        "context": [{"key": "lsp.session_with_capability", "operand": "definitionProvider"}]
+    },
+    {
+        "keys": ["shift+f12"],
+        "command": "lsp_symbol_references",
+        "context": [{"key": "lsp.session_with_capability", "operand": "referencesProvider"}]
+    },
+    {
+        "keys": ["f2"],
+        "command": "lsp_symbol_rename",
+        "context": [{"key": "lsp.session_with_capability", "operand": "renameProvider"}]
+    },
+    {
+        "keys": ["ctrl+alt+l"],
+        "command": "lsp_format_document",
+        "context": [{"key": "lsp.session_with_capability", "operand": "documentFormattingProvider"}]
+    },
+    { "keys": ["ctrl+shift+i"], "command": "lsp_toggle_inlay_hints" },
+
+    // ─── leader (Ctrl+Space): secondary actions ─────────────────────────
+    { "keys": ["ctrl+shift+space"], "command": "auto_complete" },  // freed by leader
+
+    { "keys": ["ctrl+space", "b"], "command": "show_overlay",
+      "args": {"overlay": "goto", "show_files": true} },   // switch buffer/file
+    {
+        "keys": ["ctrl+space", "t", "t"],
+        "command": "build", "args": {"variant": "Test package"},
+        "context": [{"key": "selector", "operator": "equal", "operand": "source.go | source.odin"}]
+    },
+    {
+        "keys": ["ctrl+space", "t", "p"],
+        "command": "build", "args": {"variant": "Test project"},
+        "context": [{"key": "selector", "operator": "equal", "operand": "source.go"}]
+    },
+    {
+        "keys": ["ctrl+space", "a"],
+        "command": "lsp_code_actions",
+        "context": [{"key": "lsp.session_with_capability", "operand": "codeActionProvider"}]
+    },
+    {
+        "keys": ["ctrl+space", "i"],
+        "command": "lsp_hover",
+        "context": [{"key": "lsp.session_with_capability", "operand": "hoverProvider"}]
+    },
+    { "keys": ["ctrl+space", "g", "n"], "command": "git_gutter_next_change" },
+    { "keys": ["ctrl+space", "g", "p"], "command": "git_gutter_prev_change" }
+]

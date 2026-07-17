@@ -1,9 +1,12 @@
-// Global LSP settings — zls and asm-lsp are registered here directly because
-// there are no stable helper packages for them on Package Control.
-// zls: hand-installed 0.16.0 at ~/.local/bin/zls, version-matched to zig.
-// asm-lsp: /usr/bin/asm-lsp (AUR), global dialect config (NASM, x86-64) in
-//          ~/.config/asm-lsp/.asm-lsp.toml — same server Emacs/Neovim use;
-//          hover documents every instruction and register.
+// Global LSP settings — zls, ols and asm-lsp are registered here directly
+// because there are no stable helper packages for them on Package Control.
+// Servers are referenced by BARE COMMAND NAME (not an absolute path) so this
+// file is portable across Linux/Windows/macOS — each machine just needs the
+// binary on PATH. Launch Sublime from a shell (`subl .`) so it inherits your
+// PATH; on macOS these live in /opt/homebrew/bin (brew) and ~/go/bin (gopls).
+// zls: brew 0.16.0, version-matched to zig. asm-lsp: brew; global dialect
+// config (NASM, x86-64) in ~/.config/asm-lsp/.asm-lsp.toml — same server
+// Emacs/Neovim use; hover documents every instruction and register.
 // gopls and clangd come from the LSP-gopls / LSP-clangd helper packages.
 {
     "show_diagnostics_panel_on_save": 0,
@@ -43,7 +46,7 @@
         },
         "zls": {
             "enabled": true,
-            "command": ["/home/christer/.local/bin/zls"],
+            "command": ["zls"],
             "selector": "source.zig",
             "schemes": ["file"],
             "initializationOptions": {

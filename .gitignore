@@ -2,3 +2,7 @@ Package Control.user-ca-bundle
 Package Control.cache/
 oscrypto-ca-bundle.crt
 *.sublime-workspace
+
+# Terminus runtime artifacts (regenerated per machine)
+Terminus/
+Terminus.hidden-color-scheme

@@ -1,0 +1,22 @@
+// Mouse bindings (macOS).
+// The Windows map uses Ctrl+Click for goto-definition, but on macOS
+// Ctrl+Click IS the secondary (right) click, so it moves to Cmd (super):
+//   Cmd+Click    goto definition via LSP (the press still places the caret
+//                first, so on non-LSP buffers it behaves like a normal click)
+//   Alt+Click    add caret (multi-cursor) — same as Windows
+[
+    {
+        "button": "button1",
+        "count": 1,
+        "modifiers": ["super"],
+        "press_command": "drag_select",
+        "command": "lsp_symbol_definition"
+    },
+    {
+        "button": "button1",
+        "count": 1,
+        "modifiers": ["alt"],
+        "press_command": "drag_select",
+        "press_args": {"additive": true}
+    }
+]

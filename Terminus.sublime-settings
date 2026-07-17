@@ -1,14 +1,24 @@
 {
-    // Git Bash as the default terminal (matches the usual console setup).
+    // Per-platform default terminal for the Ctrl+` panel.
+    // Windows: Git Bash (matches the usual console setup).
+    // macOS:   zsh as a login+interactive shell, so it sources ~/.zprofile
+    //          / ~/.zshrc and inherits your PATH (brew, ~/go/bin).
     "shell_configs": [
         {
             "name": "Git Bash",
             "cmd": ["C:\\Program Files\\Git\\bin\\bash.exe", "-i", "-l"],
             "enable": true,
             "platforms": ["windows"]
+        },
+        {
+            "name": "zsh (login)",
+            "cmd": ["/bin/zsh", "-i", "-l"],
+            "enable": true,
+            "platforms": ["osx"]
         }
     ],
     "default_config": {
-        "windows": "Git Bash"
+        "windows": "Git Bash",
+        "osx": "zsh (login)"
     }
 }

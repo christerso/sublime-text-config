@@ -9,14 +9,36 @@ with ST4).
 ## Restore on a new machine
 
 1. Install Sublime Text 4 and [Package Control](https://packagecontrol.io/installation).
-2. Clone this repo as `~/.config/sublime-text/Packages/User`.
+2. Clone this repo as `Packages/User`, at the OS-specific path:
+   - Linux:   `~/.config/sublime-text/Packages/User`
+   - macOS:   `~/Library/Application Support/Sublime Text/Packages/User`
+   - Windows: `%APPDATA%\Sublime Text\Packages\User`
 3. Start Sublime — Package Control installs everything in
    `Package Control.sublime-settings` automatically.
 
-Language servers come from the system, not from Sublime:
-`gopls` (`go install`), `clangd` (Arch `clang`), `asm-lsp` (AUR), `zls`
-(hand-installed, version-matched to zig). Global server configs shared with
-Emacs/Neovim: `~/.config/clangd/config.yaml`, `~/.config/asm-lsp/.asm-lsp.toml`.
+Language servers come from the system, not from Sublime, and are referenced by
+bare command name so each OS just needs the binary on PATH:
+`gopls` (`go install`), `clangd`, `asm-lsp`, `zls` (version-matched to zig),
+`ols` (Odin LSP). Global server configs shared with Emacs/Neovim:
+`~/.config/clangd/config.yaml`, `~/.config/asm-lsp/.asm-lsp.toml`.
+
+### macOS notes
+
+- Keys: the `Default (OSX)` map is **identical to Windows** — same literal
+  `Ctrl` keys and `Ctrl+Space` leader. Two OS keys must be freed first:
+  disable **System Settings › Keyboard › Keyboard Shortcuts › Input Sources ›
+  "Select the previous input source"** (it steals `Ctrl+Space`); goto-definition
+  on click is **`Cmd+Click`** (Ctrl+Click is the mac right-click).
+- Tools via Homebrew: `brew install zig nasm asm-lsp zls ols` and
+  `brew install --cask font-jetbrains-mono-nerd-font`. `gopls`/`clangd`/`cmake`
+  as usual (`clangd` ships with the Xcode command-line tools).
+- `odin` (built at `~/repos/Odin`) is symlinked into `~/.local/bin` so it is on
+  PATH; `odin root` still resolves through the symlink.
+- **Launch Sublime from a shell (`subl .`)** so it inherits your PATH — macOS
+  GUI (Dock/Finder) launches get a minimal PATH that omits `/opt/homebrew/bin`
+  and `~/go/bin`, so LSP servers and build systems won't be found otherwise.
+- NASM builds emit x86-64 Mach-O and run under **Rosetta 2** on Apple Silicon
+  (`softwareupdate --install-rosetta`); asm-lsp hover/completion needs no build.
 
 ## Keys (Emacs muscle memory)
 

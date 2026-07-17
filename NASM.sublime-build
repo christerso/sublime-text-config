@@ -1,13 +1,27 @@
 {
     "selector": "source.assembly",
+    // Linux (default): ELF64, freestanding link via ld (custom _start + raw
+    // syscalls). macOS overrides below assemble Mach-O64 and link via clang
+    // against libSystem (macOS forbids the bare-ld / raw-syscall style and
+    // wants a leading-underscore _main entry, e.g. `global _main`).
+    //
+    // NOTE (Apple Silicon): -f macho64 emits x86-64, so the linked binary
+    // runs under Rosetta 2 — the Run variants launch it with `arch -x86_64`.
+    // Install Rosetta once with: softwareupdate --install-rosetta.
+    // asm-lsp hover/completion in the editor works regardless of the build.
     "shell_cmd": "nasm -f elf64 -g -F dwarf \"$file_name\" -o \"$file_base.o\" && ld \"$file_base.o\" -o \"$file_base\"",
+    "osx": {
+        "shell_cmd": "nasm -f macho64 -g \"$file_name\" -o \"$file_base.o\" && clang -arch x86_64 \"$file_base.o\" -o \"$file_base\""
+    },
     "working_dir": "${file_path}",
     "file_regex": "^(.+\\.(?:asm|nasm|s)):([0-9]+): (.*)$",
 
     "variants": [
         { "name": "Run",
-          "shell_cmd": "nasm -f elf64 -g -F dwarf \"$file_name\" -o \"$file_base.o\" && ld \"$file_base.o\" -o \"$file_base\" && \"./$file_base\"" },
+          "shell_cmd": "nasm -f elf64 -g -F dwarf \"$file_name\" -o \"$file_base.o\" && ld \"$file_base.o\" -o \"$file_base\" && \"./$file_base\"",
+          "osx": { "shell_cmd": "nasm -f macho64 -g \"$file_name\" -o \"$file_base.o\" && clang -arch x86_64 \"$file_base.o\" -o \"$file_base\" && arch -x86_64 \"./$file_base\"" } },
         { "name": "Link with libc (cc) & run",
-          "shell_cmd": "nasm -f elf64 -g -F dwarf \"$file_name\" -o \"$file_base.o\" && cc -no-pie \"$file_base.o\" -o \"$file_base\" && \"./$file_base\"" }
+          "shell_cmd": "nasm -f elf64 -g -F dwarf \"$file_name\" -o \"$file_base.o\" && cc -no-pie \"$file_base.o\" -o \"$file_base\" && \"./$file_base\"",
+          "osx": { "shell_cmd": "nasm -f macho64 -g \"$file_name\" -o \"$file_base.o\" && clang -arch x86_64 \"$file_base.o\" -o \"$file_base\" && arch -x86_64 \"./$file_base\"" } }
     ]
 }

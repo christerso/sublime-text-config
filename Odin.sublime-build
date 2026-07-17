@@ -15,8 +15,14 @@
         // ${folder} = the top folder open in the side bar (the repo root /
         // the main package), regardless of which file is focused.
         { "name": "Run",            "working_dir": "${folder}", "shell_cmd": "odin run ." },
-        { "name": "Build",          "working_dir": "${folder}", "shell_cmd": "odin build . -out:.\\out.exe" },
-        { "name": "Build (debug)",  "working_dir": "${folder}", "shell_cmd": "odin build . -debug -out:.\\out.exe" },
+        // -out name is platform-specific (.exe on Windows, .bin elsewhere) via
+        // per-variant osx/linux overrides so each OS produces a sane binary.
+        { "name": "Build",          "working_dir": "${folder}", "shell_cmd": "odin build . -out:.\\out.exe",
+          "osx":   { "shell_cmd": "odin build . -out:out.bin" },
+          "linux": { "shell_cmd": "odin build . -out:out.bin" } },
+        { "name": "Build (debug)",  "working_dir": "${folder}", "shell_cmd": "odin build . -debug -out:.\\out.exe",
+          "osx":   { "shell_cmd": "odin build . -debug -out:out.bin" },
+          "linux": { "shell_cmd": "odin build . -debug -out:out.bin" } },
 
         // ── run scoped to the current file / package ──────────────────
         { "name": "Run this package", "shell_cmd": "odin run ." },
